@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"log"
-	"loja/models"
+	"github.com/evellyncosta/loja/models"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -49,4 +49,10 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	models.DeletaProduto(idDoProduto)
 	http.Redirect(w, r, "/", 301)
+}
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+	idDoProduto := r.URL.Query().Get("id")
+	produto := models.EditaProduto(idDoProduto)
+	temp.ExecuteTemplate(w, "Edit", produto)
 }

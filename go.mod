@@ -1,4 +1,4 @@
-module loja
+module github.com/evellyncosta/loja
 
 go 1.17
 

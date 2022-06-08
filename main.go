@@ -1,7 +1,7 @@
 package main
 
 import (
-	"loja/routes"
+	"github.com/evellyncosta/loja/routes"
 	"net/http"
 )
 
