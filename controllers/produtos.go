@@ -56,3 +56,32 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	produto := models.EditaProduto(idDoProduto)
 	temp.ExecuteTemplate(w, "Edit", produto)
 }
+
+func Update(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST"{
+		id := r.FormValue("id")
+		nome := r.FormValue("nome")
+		descricao := r.FormValue("descricao")
+		preco := r.FormValue("preco")
+		quantidade := r.FormValue("quantidade")
+
+		idCoverntidoParaInt, err := strconv.Atoi(id)
+		if err != nil{
+			log.Println("Erro na conversaro do ID para int:", err)
+		}
+
+		precoCovertidoParaFloat, err := strconv.ParseFloat(preco, 64)
+		if err != nil{
+			log.Println("Erro na conversaro do preco para float64:", err)
+		}
+
+		quantidadeConvertidaParaInt, err := strconv.Atoi(quantidade)
+		if err != nil{
+			log.Println("Erro na conversaro da quantidade para int:", err)
+		}
+
+		models.AtulizaProduto(idCoverntidoParaInt, nome, descricao, precoCovertidoParaFloat, quantidadeConvertidaParaInt)
+	}
+
+	http.Redirect(w, r, "/", 301)
+}
